@@ -7,7 +7,7 @@ class Index extends React.Component {
     return (
         <>
         <section>
-            <h1>Featured Posts</h1>
+            <h1>Movie List</h1>
             <div id="article-list">
                 <div>
                     <a href="">

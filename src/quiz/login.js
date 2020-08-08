@@ -1,27 +1,75 @@
-import React, { createContext, useState } from 'react'
+import React, {useState,useContext} from 'react'
+import {useHistory} from 'react-router-dom'
+import {LoginContext} from './loginContext'
+import Swal from 'react-bootstrap-sweetalert';
 import './login.css'
 
 const Login = () => {
+    const[status, setStatus] = useContext(LoginContext)
+    const history = useHistory();
     const [input, setInput] = useState({
         username: "",
         password: ""
     })
+    const [alert, setAlert] = useState(null)
 
-    handleChange = () => {
+  
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+        setInput(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+	}
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        if(input['username'].replace(/\s/g, '')!== "" && input['password'].replace(/\s/g, '')!== ""){
+            if(input['username'] == 'sanbercode' && Number(input['password']) == 12345){
+                setStatus(true)
+                handleSucces()
+            }else{
+                setStatus(false)
+                handleError()
+            }
+        }
     }
 
-    handleSubmit = () => {
-
+    const handleError = () => {
+        const getAlert  = () => (<Swal 
+            danger
+            title = 'Username/Password Wrong'
+            onConfirm = {() => hideAlert()}
+        >
+        </Swal>
+        )
+        setAlert(getAlert())
     }
 
-    handleError = () => {
-
+    const handleSucces = () => {
+        const getAlert  = () => (
+            <Swal 
+            success
+            title = 'Login Success !'
+            onConfirm = {() => hideAlertSuccess()}
+        >
+            Welcome Sanbercode Member
+        </Swal>
+        )
+        setAlert(getAlert())
     }
 
-    handleSucces = () => {
-        
-    }
+
+    const hideAlert = () => {
+        setAlert(null);
+    };
+
+    const hideAlertSuccess = () => {
+        history.push("/movies");
+        setAlert(null);
+    };
+
     return (
         <>
         <div class="container">
@@ -36,19 +84,19 @@ const Login = () => {
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="username : sanbercode"/>
+                                <input type="text" class="form-control" value={input.username} onChange={handleChange} name="username" placeholder="username : sanbercode"/>
                                 
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="password : 12345"/>
+                                <input type="password" class="form-control" value={input.password} onChange={handleChange} name="password" placeholder="password : 12345"/>
                             </div>
                             <div class="row align-items-center remember">
                                 <input type="checkbox"/>Remember Me
@@ -56,6 +104,7 @@ const Login = () => {
                             <div class="form-group">
                                 <input type="submit" value="Login" class="btn float-right login_btn"/>
                             </div>
+                            {alert}
                         </form>
                     </div>
                     <div class="card-footer">

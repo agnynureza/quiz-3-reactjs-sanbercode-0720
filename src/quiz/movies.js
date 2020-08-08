@@ -74,7 +74,6 @@ const Movies = () => {
             ...prevState,
             [name]: value
         }))
-        console.log(input)
 	}
 
     const hideAlert = () => {
@@ -215,7 +214,7 @@ const Movies = () => {
                         <td>{el.genre}</td>
                         <td>{el.rating}</td>
 						<td>
-							<button type="button" class="btn btn-warning" onClick={handleEdit} value={el.id}>Edit</button>
+							<button type="button" class="btn btn-warning" onClick={handleEdit} value={el.id}>Edit</button><br/>
 							&nbsp;
 							<button type="button" class="btn btn-danger" onClick={handleAlertDelete} value ={el.id}>Delete</button>
 						</td>
