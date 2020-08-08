@@ -1,13 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import logo from '../img/logo.png'
 import {Link} from 'react-router-dom'
+import {LoginContext} from './loginContext'
 
-class Navbar extends React.Component {
-    state = {}
-    render(){
-        return (
-            <>
-            <header>
+const Navbar = () => {
+    const[status, setStatus] = useContext(LoginContext)
+
+    return (
+        <>
+        <header>
             <img id="logo" src={logo} width="200px"/>
             <nav>
                 <ul>
@@ -23,15 +24,19 @@ class Navbar extends React.Component {
                     <li>
                         <Link to="/movies">Movie List Editor</Link> 
                     </li>
-                    <li>
+                    {status ? 
+                        <li>
+                            <Link to="/">Logout</Link> 
+                        </li> 
+                      :
+                        <li>
                         <Link to="/login">Login</Link> 
-                    </li>
+                        </li>
+                    }  
                 </ul>
             </nav>
         </header>
         </> 
-        )
-    }
+    )
 }
-
 export default Navbar;

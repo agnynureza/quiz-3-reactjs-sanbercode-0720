@@ -26,15 +26,37 @@ const Movies = () => {
 		}
 	},[movies])
 
+
+    const handleAlertDelete = (event) => {
+        let x = event.target.value
+        const getAlert = () =>(
+            <Swal
+                warning
+                showCancel
+                confirmBtnText="Yes, delete it!"
+                confirmBtnBsStyle="danger"
+                title="Delete This Movie?"
+                onConfirm={() => handleDelete(x)}
+                onCancel={() => hideAlert()}
+                focusCancelBtn
+            >
+            You will not be able to recover this data!
+            </Swal>
+        )
+        setAlert(getAlert())
+    }
+
 	const handleDelete = (event) => {
-		let id = Number(event.target.value)
+		let id = Number(event)
 		let NewMovie = movies.filter(el => el.id !== id)
 
 		axios.delete(` http://backendexample.sanbercloud.com/api/movies/${id}`)
 			.then(res => {
-				console.log(res)
+                console.log(res)
+                handleSuccess('Success Delete Data Movie')
 			})
             setMovies([...NewMovie])
+        
 	}
 
 	const handleEdit = (event) => {
@@ -195,7 +217,7 @@ const Movies = () => {
 						<td>
 							<button type="button" class="btn btn-warning" onClick={handleEdit} value={el.id}>Edit</button>
 							&nbsp;
-							<button type="button" class="btn btn-danger" onClick={handleDelete} value ={el.id}>Delete</button>
+							<button type="button" class="btn btn-danger" onClick={handleAlertDelete} value ={el.id}>Delete</button>
 						</td>
 					</tr>
 				)
