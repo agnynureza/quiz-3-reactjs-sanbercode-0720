@@ -1,12 +1,12 @@
 import React from 'react';
 import Routes from './quiz/router'
-import Home from './quiz/index' 
+import Navbar from './quiz/navbar'
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <Home/>
+      <Navbar/>
       <Routes/>
     </Router>
   );

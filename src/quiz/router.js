@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './index'
 import About from './about'
 import Contact from './contact' 
+import Movies from './movies'
 
 import { Switch, Route } from "react-router";
 
@@ -15,10 +16,10 @@ const Routes = () => {
         <About/>
       </Route>
       <Route exact path="/contact">
-        <Contact />
+        <Contact/>
       </Route>
       <Route exact path="/movies">
-        
+        <Movies/>
       </Route>
       <Route exact path="/login">
         
