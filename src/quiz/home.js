@@ -6,7 +6,7 @@ import './style.css'
 
 // const [status,setStatus,movies,setMovies] = this.context
 
-class Index extends React.Component {
+class Home extends React.Component {
     static contextType = Context
 
     componentDidMount = () => {
@@ -28,7 +28,13 @@ class Index extends React.Component {
             this.context[3](this.context[2].sort((a,b)=> Number(b.rating) - Number(a.rating)))
         }        
     }  
-      
+
+    componentWillUnmount(){
+        if(this.context[2]){
+            this.context[3](this.context[2].sort((a,b)=> Number(b.rating) - Number(a.rating)))
+        }
+    }
+
     render() {
     return (
         <>
@@ -40,7 +46,7 @@ class Index extends React.Component {
                         <div>
                             <h3>{el.title}</h3>
                             <p><strong>Rating: {el.rating}</strong></p>
-                            <p><strong>Durasi: {el.duration/60} jam</strong></p>
+                            <p><strong>Durasi: {Math.round(el.duration/60)} jam</strong></p>
                             <p><strong>Genre: {el.genre}</strong></p>
                             <p><strong>Tahun Release: {el.year}</strong></p>
                             <p>{el.description}</p>
@@ -57,4 +63,4 @@ class Index extends React.Component {
     }
 }
 
-export default Index ;
+export default Home ;
