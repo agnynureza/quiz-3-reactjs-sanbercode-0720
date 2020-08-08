@@ -1,84 +1,52 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import Axios from 'axios'
+import {Context} from './context'
+
 import './style.css'
 
+// const [status,setStatus,movies,setMovies] = this.context
+
 class Index extends React.Component {
-    state = { }
+    static contextType = Context
+
+    componentDidMount = () => {
+        if(this.context[2] == null){
+			Axios.get(`http://backendexample.sanbercloud.com/api/movies`)
+				.then(res => {
+                    let data = res.data.map(el => {
+                        return {
+                            title:el.title, description:el.description, year:el.year, duration:el.duration, genre:el.genre, rating:el.rating
+                        }
+                    })
+                    data.sort((a,b)=> Number(b.rating) - Number(a.rating))
+                    this.context[3](data)
+                })
+                .catch(err => {
+                    console.log(err)
+            })
+        }else{
+            this.context[3](this.context[2].sort((a,b)=> Number(b.rating) - Number(a.rating)))
+        }        
+    }  
+      
     render() {
     return (
         <>
         <section>
             <h1>Movie List</h1>
             <div id="article-list">
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 1</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 2</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 3</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 4</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 5</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 5</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
-                <div>
-                    <a href="">
-                        <h3>Lorem Post 5</h3>
-                    </a>
-                    <p>
-                        Lorem Ipsum Dolor Sit Amet, mea te verear signiferumque, per illum labores ne. Blandit omnesque
-                        scripserit pri ex, et pri dicant eirmod deserunt. Aeque perpetua ea nec. Sit erant patrioque
-                        delicatissimi ut. Et sea quem sint, nam in minim voluptatibus. Etiam placerat eam in.
-                    </p>
-                </div>
+                {this.context[2] !== null && this.context[2].map((el)=>{
+                    return(
+                        <div>
+                            <h3>{el.title}</h3>
+                            <p><strong>Rating: {el.rating}</strong></p>
+                            <p><strong>Durasi: {el.duration/60} jam</strong></p>
+                            <p><strong>Genre: {el.genre}</strong></p>
+                            <p><strong>Tahun Release: {el.year}</strong></p>
+                            <p>{el.description}</p>
+                    </div>
+                    ) 
+                })}
             </div>
         </section>
         <footer>

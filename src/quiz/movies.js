@@ -1,9 +1,10 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import Swal from 'react-bootstrap-sweetalert';
+import {Context} from './context'
 
 const Movies = () => {
-	const [movies, setMovies] = useState(null)
+    const [status, setStatus, movies, setMovies] = useContext(Context)
 	const [input, setInput] = useState({
 		title: "",
 		description: "",

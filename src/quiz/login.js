@@ -1,11 +1,11 @@
 import React, {useState,useContext} from 'react'
 import {useHistory} from 'react-router-dom'
-import {LoginContext} from './loginContext'
+import {Context} from './context'
 import Swal from 'react-bootstrap-sweetalert';
 import './login.css'
 
 const Login = () => {
-    const[status, setStatus] = useContext(LoginContext)
+    const[status, setStatus] = useContext(Context)
     const history = useHistory();
     const [input, setInput] = useState({
         username: "",

@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react'
 import logo from '../img/logo.png'
 import {Link, useHistory} from 'react-router-dom'
-import {LoginContext} from './loginContext'
+import {Context} from './context'
 import Swal from 'react-bootstrap-sweetalert';
  
 const Navbar = () => {
-    const[status, setStatus] = useContext(LoginContext)
+    const[status, setStatus] = useContext(Context)
     const [alert, setAlert] = useState(null)
     const history = useHistory()
 
