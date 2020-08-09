@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import Axios from 'axios'
 import {Context} from './context'
 
@@ -15,7 +15,7 @@ class Home extends React.Component {
 				.then(res => {
                     let data = res.data.map(el => {
                         return {
-                            title:el.title, description:el.description, year:el.year, duration:el.duration, genre:el.genre, rating:el.rating
+                            id:el.id, title:el.title, description:el.description, year:el.year, duration:el.duration, genre:el.genre, rating:el.rating
                         }
                     })
                     data.sort((a,b)=> Number(b.rating) - Number(a.rating))
@@ -44,7 +44,7 @@ class Home extends React.Component {
                 {this.context[2] !== null && this.context[2].map((el)=>{
                     return(
                         <div>
-                            <h3>{el.title}</h3>
+                            <h2>{el.title}</h2>
                             <p><strong>Rating: {el.rating}</strong></p>
                             <p><strong>Durasi: {Math.round(el.duration/60)} jam</strong></p>
                             <p><strong>Genre: {el.genre}</strong></p>

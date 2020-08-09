@@ -26,7 +26,7 @@ const Login = () => {
         event.preventDefault()
 
         if(input['username'].replace(/\s/g, '')!== "" && input['password'].replace(/\s/g, '')!== ""){
-            if(input['username'] == 'sanbercode' && Number(input['password']) == 12345){
+            if(input['username'] === 'sanbercode' && Number(input['password']) === 12345){
                 setStatus(true)
                 handleSucces()
             }else{

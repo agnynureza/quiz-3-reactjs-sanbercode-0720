@@ -25,7 +25,7 @@ const Movies = () => {
                         genre: el.genre, rating: el.rating}}))
 				})
 		}
-	},[movies])
+	})
 
 
     const handleAlertDelete = (event) => {
@@ -42,22 +42,22 @@ const Movies = () => {
                 focusCancelBtn
             >
             You will not be able to recover this data!
-            </Swal>
+            </Swal> 
         )
         setAlert(getAlert())
     }
 
 	const handleDelete = (event) => {
-		let id = Number(event)
+        let id = Number(event)
 		let NewMovie = movies.filter(el => el.id !== id)
 
 		axios.delete(` http://backendexample.sanbercloud.com/api/movies/${id}`)
 			.then(res => {
                 console.log(res)
+                setMovies([...NewMovie]) 
                 handleSuccess('Success Delete Data Movie')
 			})
-            setMovies([...NewMovie])
-        
+            
 	}
 
 	const handleEdit = (event) => {

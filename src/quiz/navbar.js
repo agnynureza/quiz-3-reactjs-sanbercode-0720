@@ -38,7 +38,7 @@ const Navbar = () => {
     return (
         <>
         <header>
-            <img id="logo" src={logo} width="200px"/>
+            <img id="logo" alt=""logo src={logo} width="200px"/>
             <nav>
                 <ul>
                     <li>
