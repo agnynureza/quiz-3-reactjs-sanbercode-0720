@@ -214,8 +214,8 @@ const Movies = () => {
                         <td>{el.duration}</td>
                         <td>{el.genre}</td>
                         <td>{el.rating}</td>
-						<td>
-							<button type="button" class="btn btn-warning" onClick={handleEdit} value={el.id}>Edit</button><br/>
+						<td style={{display: "block", margin: "auto"}}>
+							<button type="button" class="btn btn-warning" onClick={handleEdit} value={el.id}>Edit</button>
 							&nbsp;
 							<button type="button" class="btn btn-danger" onClick={handleAlertDelete} value ={el.id}>Delete</button>
 						</td>
@@ -223,34 +223,37 @@ const Movies = () => {
 				)
 			})}
 		</table>
-		<h1 style={{textAlign:"center", marginTop: '25px', marginBottom: '25px'}}>Form Movie</h1>
-		<form onSubmit={handleSubmit} style={{width:'25%', marginLeft: 'auto', marginRight: 'auto'}}>
-			<div class="form-group">
-				<label> Title : </label>          
-				<input class="form-control" type="text" name='title' value={input.title} onChange={handleChange} placeholder="title" />
-			</div>
-			<div className="form-group">
-				<label> Description: </label>
-				<input class="form-control" type="text" name='description' value ={input.description} onChange={handleChange} placeholder="description" />
-			</div>
-			<div className="form-group">
-				<label> Year: </label>
-				<input class="form-control" type="number" name='year' value={input.year} onChange={handleChange} placeholder="year ex:2000" />
-			</div>
-            <div className="form-group">
-				<label> Duration : </label>
-				<input class="form-control" type="number" name='duration' value={input.duration} onChange={handleChange} placeholder="duration in minute" />
-			</div>
-            <div className="form-group">
-				<label> Genre : </label>
-				<input class="form-control" type="text" name='genre' value={input.genre} onChange={handleChange} placeholder="genre ex:drama,horror" />
-			</div>
-            <div className="form-group">
-				<label> Rating : </label>
-				<input class="form-control" type="number" name='rating' value={input.rating} onChange={handleChange} placeholder="rating only from 1 to 10" />
-			</div>
-			<br/>
-			<button type="submit" class="btn btn-primary"> submit</button>
+		<form onSubmit={handleSubmit} style={{width:'75%', marginLeft: 'auto', marginRight: 'auto'}}>
+        <h1 style={{textAlign:"center", marginTop: '25px', marginBottom: '25px'}}>Form Movie</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <label> Title : </label>          
+                    <input class="form-control" type="text" name='title' value={input.title} onChange={handleChange} placeholder="title" />
+                </div>
+                <div className="col-md-4">
+                    <label> Description: </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='description' value ={input.description} onChange={handleChange} placeholder="description" ></textarea>
+                </div>
+                <div className="col-md-4">
+                    <label> Year: </label>
+                    <input class="form-control" type="number" name='year' value={input.year} onChange={handleChange} placeholder="year ex:2000" />
+                </div>
+            </div>
+            <div class="row" style={{marginTop:"25px"}}>
+                <div className="col-md-4">
+                    <label> Duration : </label>
+                    <input class="form-control" type="number" name='duration' value={input.duration} onChange={handleChange} placeholder="duration in minute" />
+                </div>
+                <div className="col-md-4">
+                    <label> Genre : </label>
+                    <input class="form-control" type="text" name='genre' value={input.genre} onChange={handleChange} placeholder="genre ex:drama,horror" />
+                </div>
+                <div className="col-md-4">
+                    <label> Rating : </label>
+                    <input class="form-control" type="number" name='rating' value={input.rating} onChange={handleChange} placeholder="rating only from 1 to 10" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right" style={{marginTop:"25px"}}> submit </button>
             {alert}
 		</form>
 		</>

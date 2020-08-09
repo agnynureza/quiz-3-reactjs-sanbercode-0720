@@ -50,7 +50,7 @@ class Home extends React.Component {
                             <p><strong>Genre: {el.genre}</strong></p>
                             <p><strong>Tahun Release: {el.year}</strong></p>
                             <p>{el.description}</p>
-                    </div>
+                        </div>
                     ) 
                 })}
             </div>
