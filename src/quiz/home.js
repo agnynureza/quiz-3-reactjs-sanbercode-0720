@@ -43,13 +43,15 @@ class Home extends React.Component {
             <div id="article-list">
                 {this.context[2] !== null && this.context[2].map((el)=>{
                     return(
-                        <div>
-                            <h2>{el.title}</h2>
-                            <p><strong>Rating: {el.rating}</strong></p>
-                            <p><strong>Durasi: {Math.round(el.duration/60)} jam</strong></p>
-                            <p><strong>Genre: {el.genre}</strong></p>
-                            <p><strong>Tahun Release: {el.year}</strong></p>
-                            <p>{el.description}</p>
+                        <div class="border border-white" style={{marginBottom:"15px", marginLeft:"10px"}}>
+                            <div style={{marginLeft: "7px", color: "white"}}>
+                                <h2>{el.title}</h2>
+                                <p><strong>Rating: {el.rating}</strong></p>
+                                <p><strong>Durasi: {Math.round(el.duration/60)} jam</strong></p>
+                                <p><strong>Genre: {el.genre}</strong></p>
+                                <p><strong>Tahun Release: {el.year}</strong></p>
+                                <p>{el.description}</p>
+                            </div>
                         </div>
                     ) 
                 })}
